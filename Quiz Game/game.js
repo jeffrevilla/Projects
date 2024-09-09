@@ -32,6 +32,14 @@ let questions = [
         choice3: "text-size",
         choice4: "text-style",
         answer: 2
+    },
+    {
+        question: "Which company developed the Python programming language?",
+        choice1: "Micro",
+        choice2: "Google",
+        choice3: "Sun ",
+        choice4: "Python Software",
+        answer: 3
     }
 
 ]
@@ -77,15 +85,12 @@ choices.forEach(choice => {
         const selectedAnswer = selectedChoice.dataset["number"];
 
         const classToApply = selectedAnswer == currentQuestion.answer? "correct" : "incorrect";
-        
         selectedChoice.parentElement.classList.add(classToApply);
 
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
         }, 1000);
-
-        getNewQuestion();
     });
 });
 
