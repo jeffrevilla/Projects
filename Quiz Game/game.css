@@ -47,3 +47,16 @@
 .hud-maint-ext{
     text-align: center;
 }
+
+#progressBar{
+    width: 20rem;
+    height: 4rem;
+    border: 0.3rem solid #56a5eb;
+    margin-top: 1.5rem;
+}
+
+#progressBbarFull{
+    height: 3.5rem;
+    background-color: rgb(150, 150, 177);
+    width: 0%;
+}
