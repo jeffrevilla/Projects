@@ -12,12 +12,32 @@ let availableQuestions = [];
 
 let questions = [];
 
-fetch('questions.json')
+fetch(
+    'https://opentdb.com/api.php?amount=15&category=31&difficulty=medium&type=multiple'
+)
     .then((res) => {
         return res.json();
     })
     .then((loadedQuestions) => {
-        questions = loadedQuestions;
+        questions = loadedQuestions.results.map((loadedQuestion) => {
+            const formattedQuestion = {
+                question: loadedQuestion.question,
+            };
+
+            const answerChoices = [...loadedQuestion.incorrect_answers];
+            formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
+            answerChoices.splice(
+                formattedQuestion.answer - 1,
+                0,
+                loadedQuestion.correct_answer
+            );
+
+            answerChoices.forEach((choice, index) => {
+                formattedQuestion['choice' + (index + 1)] = choice;
+            });
+
+            return formattedQuestion;
+        });
         startGame();
     })
     .catch((err) => {
@@ -25,7 +45,7 @@ fetch('questions.json')
     });
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 15;
 
 startGame = () => {
     questionCounter = 0;
