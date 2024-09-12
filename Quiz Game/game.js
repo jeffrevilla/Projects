@@ -10,42 +10,19 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
-let questions = [
-    {
-        question: "Which company developed the Python programming language?",
-        choice1: "Microsoft",
-        choice2: "Google",
-        choice3: "Sun Microsystems",
-        choice4: "Python Software Foundation",
-        answer: 4
-    },
-    {
-        question: "Which of the following is not a JavaScript data type?",
-        choice1: "String",
-        choice2: "Boolean",
-        choice3: "Alert",
-        choice4: "Number",
-        answer: 3
-    },
-    {
-        question: "Which CSS property controls the text size?",
-        choice1: "font-style",
-        choice2: "font-size",
-        choice3: "text-size",
-        choice4: "text-style",
-        answer: 2
-    },
-    {
-        question: "Which company developed the Python programming language?",
-        choice1: "Micro",
-        choice2: "Google",
-        choice3: "Sun ",
-        choice4: "Python Software",
-        answer: 3
-    }
+let questions = [];
 
-]
-
+fetch('questions.json')
+    .then((res) => {
+        return res.json();
+    })
+    .then((loadedQuestions) => {
+        questions = loadedQuestions;
+        startGame();
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 3;
@@ -109,4 +86,3 @@ incrementScore = num => {
     scoreText.innerText = score;
 }
 
-startGame();
